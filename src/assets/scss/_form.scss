@@ -1,0 +1,37 @@
+.diabetes-calc {
+  input[type="number"] {
+    width: 64px;
+    height: 32px;
+  }
+  ul.vertical {
+    width: 100%;
+    background-color: transparent;
+    color: inherit;
+    display: block; /* Make the links appear below each other */
+    padding: 8px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+  }
+
+  ul.vertical li {
+    margin: 4px 0;
+    cursor: default;
+  }
+  ul.vertical li input:hover {
+    cursor: pointer;
+  }
+
+  ul.vertical li:hover {
+    background-color: #f1f1f1; /* Dark grey background on mouse-over */
+  }
+
+  table.regular {
+    border-collapse: collapse;
+    width: 100%;
+    td,
+    th {
+      border: none;
+      text-align: left;
+      padding: 4px;
+    }
+  }
+}

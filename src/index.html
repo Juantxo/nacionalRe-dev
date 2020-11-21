@@ -17,27 +17,27 @@
                     <div class="col-6">
                         <p class="form-title">¿Ha padecido alguna de las siguiente patologías?</p>
                         <ul class="margin__top-s vertical">
-                            <li> <input type="checkbox" id="cbox1" name="cbox1" value="cbox1"
+                            <li> <input type="checkbox" id="cbox1" name="cbox" value="cbox1"
                                     autocomplete="off">Retinología</li>
-                            <li><input type="checkbox" id="cbox2" name="cbox2" value="cbox2"
+                            <li><input type="checkbox" id="cbox2" name="cbox" value="cbox2"
                                     autocomplete="off">Neuropatía</li>
-                            <li><input type="checkbox" id="cbox3" name="cbox3" value="cbox3"
+                            <li><input type="checkbox" id="cbox3" name="cbox" value="cbox3"
                                     autocomplete="off">Enfermedad coronaria
                                 (Angina, infarto
                                 aguado)</li>
-                            <li><input type="checkbox" id="cbox4" name="cbox4" value="cbox4"
+                            <li><input type="checkbox" id="cbox4" name="cbox" value="cbox4"
                                     autocomplete="off">Enfermedad renal asociada
                             </li>
-                            <li><input type="checkbox" id="cbox5" name="cbox5" value="cbox5"
+                            <li><input type="checkbox" id="cbox5" name="cbox" value="cbox5"
                                     autocomplete="off">Enfermedad arterial
                                 asociada</li>
-                            <li><input type="checkbox" id="cbox6" name="cbox6" value="cbox6"
+                            <li><input type="checkbox" id="cbox6" name="cbox" value="cbox6"
                                     autocomplete="off">Enfermedad arterial
                                 periférica</li>
-                            <li><input type="checkbox" id="cbox7" name="cbox7" value="cbox7"
-                                    autocomplete="off">Accidente cerebrovascular
+                            <li><input type="checkbox" id="cbox7" name="cbox" value="cbox7" autocomplete="off">Accidente
+                                cerebrovascular
                             </li>
-                            <li><input type="checkbox" id="cbox8" name="cbox8" value="cbox8" autocomplete="off">Ingreso
+                            <li><input type="checkbox" id="cbox8" name="cbox" value="cbox8" autocomplete="off">Ingreso
                                 hace menos de 6
                                 meses por una
                                 complicación</li>
@@ -284,14 +284,43 @@
             </div><!-- row -->
         </div><!-- CONTAINER -->
 
+        <!-- The Modal -->
+        <div id="modal_window" class="modal-window">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2 id="modal_header_span">Atención</h2>
+                </div>
+                <div class="modal-body">
+                    <p> <strong><span id="modal_body1_span">Patología</span></strong></p>
+                    <p> <span id="modal_body2_span">Patología</span></p>
+                </div>
+                <div class="modal-footer">
+                    <h3 id="modal_footer_span">Modal Footer</h3>
+                </div>
+            </div>
+
+        </div>
 
 
-    </div>
-    <script src="./assets/js/calc.v1.js"></script>
-    <script>
-        let x = this.calc.sayHello('Juantxo', 'Cruz');
-        let y;
-    </script>
+
+        <script type="application/javascript">
+
+            let loadScripts = (sources) => {
+                sources.forEach(src => {
+                    let script = document.createElement('script');
+                    script.src = src;
+                    script.async = false; //<-- the important part
+                    document.body.appendChild(script); //<-- make sure to append to body instead of head 
+                });
+            }
+
+            loadScripts(["./assets/js/c2.v1.js?v=2020", "./assets/js/diabetes.js?v=2020"])
+
+
+        </script>
 
 </body>
 
