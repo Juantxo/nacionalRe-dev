@@ -300,6 +300,7 @@
 
 
             if (fieldsOn()) {
+                // we are here: THE CALCULATIONS
 
                 let ok;
             } else {
@@ -314,8 +315,6 @@
         initForm();
         initModalWindow();
         initSubmit();
-
-
     };
 
     init();
