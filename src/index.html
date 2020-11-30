@@ -16,28 +16,30 @@
                 <div class="row">
                     <div class="col-6">
                         <p class="form-title">¿Ha padecido alguna de las siguiente patologías?</p>
+                        <p class="mandatory" id='cbox_msg'><small>Estas patologías no permite asegurar ningún
+                                riesgo.</small></p>
                         <ul class="margin__top-s vertical">
-                            <li> <input type="checkbox" id="cbox1" name="cbox" value="cbox1"
-                                    autocomplete="off">Retinología</li>
-                            <li><input type="checkbox" id="cbox2" name="cbox" value="cbox2"
-                                    autocomplete="off">Neuropatía</li>
-                            <li><input type="checkbox" id="cbox3" name="cbox" value="cbox3"
-                                    autocomplete="off">Enfermedad coronaria
+                            <li> <input type="checkbox" id="cbox1" name="cbox" value="" autocomplete="off">Retinología
+                            </li>
+                            <li><input type="checkbox" id="cbox2" name="cbox" value="" autocomplete="off">Neuropatía
+                            </li>
+                            <li><input type="checkbox" id="cbox3" name="cbox" value="" autocomplete="off">Enfermedad
+                                coronaria
                                 (Angina, infarto
                                 aguado)</li>
-                            <li><input type="checkbox" id="cbox4" name="cbox" value="cbox4"
-                                    autocomplete="off">Enfermedad renal asociada
+                            <li><input type="checkbox" id="cbox4" name="cbox" value="" autocomplete="off">Enfermedad
+                                renal asociada
                             </li>
-                            <li><input type="checkbox" id="cbox5" name="cbox" value="cbox5"
-                                    autocomplete="off">Enfermedad arterial
+                            <li><input type="checkbox" id="cbox5" name="cbox" value="" autocomplete="off">Enfermedad
+                                arterial
                                 asociada</li>
-                            <li><input type="checkbox" id="cbox6" name="cbox" value="cbox6"
-                                    autocomplete="off">Enfermedad arterial
+                            <li><input type="checkbox" id="cbox6" name="cbox" value="" autocomplete="off">Enfermedad
+                                arterial
                                 periférica</li>
-                            <li><input type="checkbox" id="cbox7" name="cbox" value="cbox7" autocomplete="off">Accidente
+                            <li><input type="checkbox" id="cbox7" name="cbox" value="" autocomplete="off">Accidente
                                 cerebrovascular
                             </li>
-                            <li><input type="checkbox" id="cbox8" name="cbox" value="cbox8" autocomplete="off">Ingreso
+                            <li><input type="checkbox" id="cbox8" name="cbox" value="" autocomplete="off">Ingreso
                                 hace menos de 6
                                 meses por una
                                 complicación</li>
@@ -119,7 +121,8 @@
 
                             </tr>
                             <tr>
-                                <td>Masa corporal</td>
+                                <td>Masa corporal<p class="mandatory" id='body_mass_msg'><small></small></p>
+                                </td>
                                 <td><input type="number" id="body_mass" name="body_mass" min="0" max="50"
                                         autocomplete="off" readonly></td>
                             </tr>
@@ -293,7 +296,7 @@
                     </div>
                     <div class="col-4">
                         <input id="submit_button" type="submit" name='submit_button' value="Enviar datos"
-                            autocomplete="off" disabled>
+                            autocomplete="off">
                     </div>
 
                 </div><!-- row -->

@@ -31,6 +31,13 @@
         footer: "NacionalRe"
     }
 
+    let fieldsOffModalSetup = {
+        header: "Atención",
+        content: "Por favor, rellene correctamente los campos con mensajes en rojo.",
+        action: "Existen campos erróneos o sin rellenar.",
+        footer: "NacionalRe"
+    }
+
     // global results
     let _age = '';
     let _gender = formForm.elements['gender'].value;
@@ -73,21 +80,41 @@
         if (event.currentTarget.name === 'birthday') {
             drawModalWindowInnerHTML(message);
         }
+        if (event.currentTarget.name === 'diabetes_form') {
+            drawModalWindowInnerHTML(message);
+        }
     };
 
-    // BUTTON ENABLE ONLY if all fields are ok
-    function enableSubmitButton(fields) {
-        // we are here --> add event listenert to fields --> only numbers --> enable send
-        let i, l = fields.length;
-        let emptyFields = [];
-        for (i = 0; i < l; i++) {
-            let h = formForm[fields[i]];
-            if (formForm[fields[i]].value === "") {
-                emptyFields.push(fields[i]);
+
+    // CHECK ALL FIELDS FUNCTIONS
+    function fieldsOn() {
+        let nodeList = formForm.querySelectorAll('input[type="number"], input[type="date"], input[type="checkbox"]');
+        let wrongFields = [];
+        let i = 0;
+        for (i = 0; i < nodeList.length; i++) {
+            if (nodeList[i].type === "checkbox" && nodeList[i].checked) {
+                wrongFields.push(nodeList[i]);
+            }
+            if ((nodeList[i].type === "date" || nodeList[i].type === "number") && nodeList[i].value === "") {
+                wrongFields.push(nodeList[i]);
             }
         }
-        return emptyFields.length > 0 ? submitButton.disabled = false : submitButton.disabled = true
+        return wrongFields.length > 0 ? false : true;
     }
+
+    function checkNodeFields(nodeList) {
+        let i = 0;
+        for (i = 0; i < nodeList.length; i++) {
+            if (nodeList[i].type === "checkbox" && nodeList[i].checked) {
+                document.getElementById(nodeList[i].name + "_msg").style.display = "block";
+            }
+            if ((nodeList[i].type === "date" || nodeList[i].type === "number") && nodeList[i].value === "") {
+                document.getElementById(nodeList[i].name + "_msg").style.display = "block";
+            }
+        }
+    }
+
+
 
     // Event listeners
 
@@ -100,19 +127,31 @@
         this.c2.addEventListenerList(fields, "change", (e) => { toggleMandatoryMsg(e) });
     }
 
-    // we are here
     function toggleMandatoryMsg(e) {
-        if (e.currentTarget.value !== "") {
+        if ((e.currentTarget.type === 'date' || e.currentTarget.type === "number") && e.currentTarget.value !== "") {
             document.getElementById(e.currentTarget.name + "_msg").style.display = "none";
             return false;
+        }
+        if (e.currentTarget.type === 'checkbox' && !e.currentTarget.checked) {
+            let boxes = document.getElementsByName(e.currentTarget.name);
+            let checked = Array.prototype.slice.call(boxes).filter(d => d.checked);
+            if (checked.length < 1) {
+                document.getElementById(e.currentTarget.name + "_msg").style.display = "none";
+                return false;
+            }
         }
         document.getElementById(e.currentTarget.name + "_msg").style.display = "block";
         return false;
     }
+
+
+    // INIT INPUTS 
     function initPathologies() {
         // 1. Pathologies
         let pathologyCheckBoxes = document.getElementsByName('cbox');
         this.c2.addEventListenerList(pathologyCheckBoxes, "click", (e) => { openModalWindow(e, pathologiesModalSetup) });
+        this.c2.addEventListenerList(pathologyCheckBoxes, "change", (e) => { toggleMandatoryMsg(e) });
+
     }
 
     function initBirthday() {
@@ -123,7 +162,6 @@
             if (!this.c2.yearIsHigher(date)) {
                 _age = this.c2.calculate_age(new Date(e.currentTarget.value));
                 document.getElementById("birthday_msg").style.display = "none";
-                enableSubmitButton(numberFields);
             }
             else {
                 openModalWindow(e, birthdayModalSetup);
@@ -219,7 +257,7 @@
 
 
 
-
+    // MODAL WINDOW
     function initModalWindow() {
         closeModalSpan.onclick = function () {
             modalDiv.style.display = "none";
@@ -252,8 +290,22 @@
         // submit
         formForm.onsubmit = (e) => {
             e.preventDefault();
+            let numericFields = formForm.querySelectorAll('input[type="number"]');
+            let pathologyFields = document.getElementsByName('cbox');
+            let dateFields = formForm.querySelectorAll('input[type="date"]');
             let x = this.c2.defaultSeparation;
-            let y;
+            checkNodeFields(pathologyFields);
+            checkNodeFields(numericFields);
+            checkNodeFields(dateFields);
+
+
+            if (fieldsOn()) {
+
+                let ok;
+            } else {
+                openModalWindow(e, fieldsOffModalSetup)
+                return false;
+            }
         }
     }
 
