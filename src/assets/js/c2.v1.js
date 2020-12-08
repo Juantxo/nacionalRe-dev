@@ -11,9 +11,7 @@
   "use strict";
   var version = "1.0.0";
 
-  function sayHello(a, b) {
-    return "This is the awesome c2 " + a + ' ' + b + "!";
-  }
+
 
   function addEventListenerList(nodelist, event, fn) {
     let e = event || window.event;
@@ -22,12 +20,26 @@
     }
   }
 
-  function yearIsHigher(dob) {
+  function dateIsHigher(dob) {
     if (Date.now() - dob.getTime() < 0) {
       return true;
     }
     return false;
+  }
 
+  function subtractYearsToDate(date, years) {
+    date.setFullYear(date.getFullYear() - years);
+    return date;
+  }
+
+  function dateIsOnRange(range, check) {
+    var dateMin = subtractYearsToDate(new Date(), range[0]);
+    var dateMax = subtractYearsToDate(new Date(), range[1]);
+
+    if (check > dateMax && check < dateMin) {
+      return true;
+    }
+    return false;
   }
   function calculate_age(dob) {
     var diff_ms = Date.now() - dob.getTime();
@@ -53,10 +65,11 @@
     return Number(cm) / 100;
   }
 
-  exports.sayHello = sayHello;
   exports.addEventListenerList = addEventListenerList;
   exports.calculate_age = calculate_age;
-  exports.yearIsHigher = yearIsHigher;
+  exports.dateIsHigher = dateIsHigher;
+  exports.subtractYearsToDate = subtractYearsToDate;
+  exports.dateIsOnRange = dateIsOnRange;
   exports.isNumberKey = isNumberKey;
   exports.cmToMeter = cmToMeter;
 

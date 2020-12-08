@@ -18,21 +18,31 @@
 
 
     let pathologiesModalSetup = {
-        header: "Atención",
+        header: "Atención:",
         content: "Esta patología no permite asegurar ningún riesgo.",
         action: "",
         footer: "NacionalRe"
     }
 
     let birthdayModalSetup = {
-        header: "Atención",
+        header: "Atención:",
         content: "La fecha seleccionada no puede ser mayor que la fecha actual.",
         action: "Por favor, escoga una fecha de nuevo",
         footer: "NacionalRe"
     }
+    let dateRange = [13, 69];
+    let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+
+    let dateRangeModalSetup = {
+        header: "Atención: Fecha fuera de rango",
+        content: "Por favor, escoga una fecha en el rango (entre " + dateRange[0] + " y " + dateRange[1] + " años de edad).",
+        action: "La fecha seleccionada debe estar entre el " + this.c2.subtractYearsToDate(new Date(), dateRange[1]).toLocaleDateString('es-ES', dateOptions) + " y el " + this.c2.subtractYearsToDate(new Date(), dateRange[0]).toLocaleDateString('es-ES', dateOptions) + ".",
+        footer: "NacionalRe"
+    }
 
     let fieldsOffModalSetup = {
-        header: "Atención",
+        header: "Atención:",
         content: "Por favor, rellene correctamente los campos con mensajes en rojo.",
         action: "Existen campos erróneos o sin rellenar.",
         footer: "NacionalRe"
@@ -59,7 +69,13 @@
     let _cholesterol = formForm.elements['cholesterol'].value;
 
 
-    let $diabetes = {
+    let $diabetesByYears = {
+        life: 0,
+        disability: 0,
+        accident: 0,
+        temporary: 0
+    }
+    let $diabetesByAge = {
         life: 0,
         disability: 0,
         accident: 0,
@@ -169,11 +185,17 @@
     function initBirthday() {
         // 2. Birthday and age
         let birthdayInput = formForm.elements['birthday'];
-        birthdayInput.onchange = (e) => {
+        birthdayInput.onblur = (e) => {
             let date = new Date(e.currentTarget.value);
-            if (!this.c2.yearIsHigher(date)) {
-                _age = this.c2.calculate_age(new Date(e.currentTarget.value));
-                document.getElementById("birthday_msg").style.display = "none";
+            if (!this.c2.dateIsHigher(date)) {
+                if (this.c2.dateIsOnRange(dateRange, date)) {
+                    _age = this.c2.calculate_age(new Date(e.currentTarget.value));
+                    document.getElementById("birthday_msg").style.display = "none";
+                } else {
+                    openModalWindow(e, dateRangeModalSetup);
+                    e.currentTarget.value = "";
+                    document.getElementById("birthday_msg").style.display = "block";
+                }
             }
             else {
                 openModalWindow(e, birthdayModalSetup);
@@ -194,6 +216,8 @@
                     break;
                 case 'diabetes':
                     _diabetes = e.currentTarget.value; // t1, t2
+                    // to move
+                    $diabetesByAge = this.c2.calcDiabetesByAge(_diabetes, Number(_age));
 
                     let x;
                     break;
@@ -229,7 +253,8 @@
             switch (name) {
                 case 'years_diabetes':
                     _yearsDiabetes = e.currentTarget.value; // string 
-                    $diabetes = this.c2.calcDiabetes(_diabetes, _yearsDiabetes);
+                    // to move
+                    $diabetesByYears = this.c2.calcDiabetesByYears(_diabetes, Number(_yearsDiabetes));
                     break;
                 case 'weight':
                     _weight = e.currentTarget.value; // string 
