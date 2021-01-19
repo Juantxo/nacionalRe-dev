@@ -120,6 +120,8 @@
         return result;
     }
 
+
+
     // TO BE DONE
     function calcImc(imc, age) {
         let imcLife = calcImcLife(imc);
@@ -133,10 +135,30 @@
         }
     }
 
+    // colors
+    function setImcColor(input, val) {
+        input.classList.remove("blue", "green", "red",);
+
+        if (val < 20) {
+            input.classList.add("blue");
+            return false;
+        }
+        if (val >= 20 && val <= 28) {
+            input.classList.add("green");
+            return false;
+        }
+        if (val > 28) {
+            input.classList.add("red");
+            return false;
+        }
+
+    }
+
 
 
 
     exports.calcImc = calcImc;
+    exports.setImcColor = setImcColor;
 
 
     Object.defineProperty(exports, '__esModule', { value: true });

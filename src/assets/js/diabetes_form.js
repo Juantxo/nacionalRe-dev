@@ -2,8 +2,9 @@
 
     let formForm = document.forms["diabetes_form"];
     //const numberFields = ["birthday", "years_diabetes", "weight", "height", "body_mass", "cigarettes", "cigars", "pipes", "wines", "beers", "spirits", "systolic", "diastolic"];
-    let resultContainer = document.getElementById("result_container");
+    //let resultContainer = document.getElementById("result_container");
     let modalDiv = document.getElementById("modal_window");
+    let modalResult = document.getElementById("modal_result");
     let submitButton = document.getElementById("submit_button");
 
     let closeModalSpan = document.getElementsByClassName("close")[0];
@@ -26,6 +27,15 @@
         action: "Por favor, escoga una fecha de nuevo",
         footer: "NacionalRe"
     }
+
+    let modalSetup = {
+        header: "Atención:",
+        content: "",
+        action: "",
+        footer: "NacionalRe"
+    }
+
+
     const dateRange = [13, 69];
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -64,25 +74,53 @@
     let _hemoglobin = formForm.elements['hemoglobin'].value;
     let _cholesterol = formForm.elements['cholesterol'].value;
 
+    let _vars = {
+        age: _age,
+        gender: _gender,
+        diabetes: _diabetes,
+        yearsDiabetes: _yearsDiabetes,
+        weight: _weight,
+        height: _height,
+        imc: _imc,
+        cigarettes: _cigarettes,
+        cigars: _cigars,
+        pipes: _pipes,
+        wines: _wines,
+        beers: _beers,
+        spirits: _spirits,
+        systolic: _systolic,
+        diastolic: _diastolic,
+        insulin: _insulin,
+        hemoglobin: _hemoglobin,
+        cholesterol: _cholesterol
+    }
 
-    let $diabetesByYears = {
-        life: 0,
-        disability: 0,
-        accident: 0,
-        temporary: 0
-    }
-    let $diabetesByAge = {
-        life: 0,
-        disability: 0,
-        accident: 0,
-        temporary: 0
-    }
-    let $imc = {
-        life: 0,
-        disability: 0,
-        accident: 0,
-        temporary: 0
-    }
+    let $result = {
+        diabetesByYears: {
+            life: 0,
+            disability: 0,
+            accident: 0,
+            temporary: 0
+        },
+        diabetesByAge: {
+            life: 0,
+            disability: 0,
+            accident: 0,
+            temporary: 0
+        },
+        imc: {
+            life: 0,
+            disability: 0,
+            accident: 0,
+            temporary: 0
+        },
+        tobacco: 0,
+        alcohol: 0,
+        hypertension: 0,
+        insulin: 0,
+        hemoglobin: 0,
+        cholesterol: 0
+    };
 
     // MODAL WINDOW FUNC
     function drawModalWindowInnerHTML(message) {
@@ -100,14 +138,12 @@
                 let pathology = event.currentTarget.nextSibling.data;
                 message['action'] = pathology + "."
                 drawModalWindowInnerHTML(message);
+
             }
+            return;
         }
-        if (event.currentTarget.name === 'birthday') {
-            drawModalWindowInnerHTML(message);
-        }
-        if (event.currentTarget.name === 'diabetes_form') {
-            drawModalWindowInnerHTML(message);
-        }
+        drawModalWindowInnerHTML(message);
+        return;
     };
 
 
@@ -218,19 +254,29 @@
                     break;
                 case 'diabetes':
                     _diabetes = e.currentTarget.value; // t1, t2
-                    // to move
-                    $diabetesByAge = this.c2.calcDiabetesByAge(_diabetes, Number(_age));
+                    // to move and delete from here
+                    $result.diabetesByAge = this.c2.calcDiabetesByAge(_diabetes, Number(_age));
 
-                    let x;
+
                     break;
                 case 'insulin':
                     _insulin = e.currentTarget.value; // ins1, ins2
+                    $result.insulin = this.c2.calcInsulin(_insulin);
+                    let x;
+
                     break;
                 case 'hemoglobin':
                     _hemoglobin = e.currentTarget.value; // hemo1, hemo2,...hemo6
+                    // to move
+                    $result.hemoglobin = this.c2.calcHemoglobin(_hemoglobin);
+                    let y;
                     break;
                 case 'cholesterol':
                     _cholesterol = e.currentTarget.value; // cho1, cho2... cho5
+                    // to move
+
+                    $result.cholesterol = this.c2.calcCholesterol(_cholesterol);
+                    let w;
                     break;
                 default:
                     return "";
@@ -238,23 +284,7 @@
         });
     }
 
-    function setImcColor(input, val) {
-        input.classList.remove("blue", "green", "red",);
 
-        if (val < 20) {
-            input.classList.add("blue");
-            return false;
-        }
-        if (val >= 20 && val <= 28) {
-            input.classList.add("green");
-            return false;
-        }
-        if (val > 28) {
-            input.classList.add("red");
-            return false;
-        }
-
-    }
 
     function setBodyMassField() {
         let input = formForm.elements['body_mass'];
@@ -262,9 +292,9 @@
             let w = this.c2.cmToMeter(Number(_height));
             _imc = Number(_weight) / (Number(w) * Number(w));
             input.value = _imc;
-            setImcColor(input, _imc);
+            this.c2.setImcColor(input, _imc);
             // to move
-            $imc = this.c2.calcImc(_imc, Number(_age));
+            $result.imc = this.c2.calcImc(_imc, Number(_age));
             let x;
 
         }
@@ -279,7 +309,7 @@
                 case 'years_diabetes':
                     _yearsDiabetes = e.currentTarget.value; // string 
                     // to move
-                    $diabetesByYears = this.c2.calcDiabetesByYears(_diabetes, Number(_yearsDiabetes));
+                    $result.diabetesByYears = this.c2.calcDiabetesByYears(_diabetes, Number(_yearsDiabetes));
                     break;
                 case 'weight':
                     _weight = e.currentTarget.value; // string 
@@ -297,6 +327,9 @@
                     break;
                 case 'pipes':
                     _pipes = e.currentTarget.value; // string 
+                    // to move
+                    $result.tabacoo = this.c2.calcTobacco(Number(_cigarettes), Number(_cigars), Number(_pipes));
+
                     break;
                 case 'wines':
                     _wines = e.currentTarget.value; // string 
@@ -305,13 +338,40 @@
                     _beers = e.currentTarget.value; // string 
                     break;
                 case 'spirits':
-                    _spirits = e.currentTarget.value; // string 
+                    _spirits = e.currentTarget.value; // string
+                    $result.alcohol = this.c2.calcAlcohol(Number(_wines), Number(_beers), Number(_spirits));
+
                     break;
                 case 'systolic':
                     _systolic = e.currentTarget.value; // string 
+                    if (parseInt(_systolic) > 145) {
+                        modalSetup.content = 'La tensión sistólica es muy alta para asegurar el riesgo.';
+                        modalSetup.action = "Por favor, asegúrese de que la cifra es correcta."
+                        openModalWindow(e, modalSetup);
+                    }
+                    if (parseInt(_systolic) < 65) {
+                        modalSetup.content = 'La tensión sistólica es muy baja para asegurar el riesgo.';
+                        modalSetup.action = "Por favor, asegúrese de que la cifra es correcta."
+                        openModalWindow(e, modalSetup);
+                    }
+                    this.c2.setSystolicColors(formForm.elements['systolic'], _systolic);
                     break;
                 case 'diastolic':
                     _diastolic = e.currentTarget.value; // string 
+                    if (parseInt(_diastolic) > 95) {
+                        modalSetup.content = 'La tensión diastólica es muy alta para asegurar el riesgo.';
+                        modalSetup.action = "Por favor, asegúrese de que la cifra es correcta."
+                        openModalWindow(e, modalSetup);
+                    }
+                    if (parseInt(_diastolic) < 45) {
+                        modalSetup.content = 'La tensión diastólica es muy baja para asegurar el riesgo.';
+                        modalSetup.action = "Por favor, asegúrese de que la cifra es correcta."
+                        openModalWindow(e, modalSetup);
+                    }
+                    this.c2.setDiastolicColors(formForm.elements['diastolic'], _diastolic);
+                    // to move
+                    $result.hypertension = this.c2.calcHypertension(Number(_systolic), Number(_diastolic));
+                    let x;
                     break;
                 default:
                     return "";
@@ -319,7 +379,6 @@
             }
         });
     }
-
 
 
 
@@ -353,7 +412,7 @@
     }
 
     function openResultContainer() {
-        resultContainer.classList.remove("hidden");
+        //resultContainer.classList.remove("hidden");
 
     }
     function initSubmit() {
@@ -377,8 +436,20 @@
 
             if (fieldsOn()) {
 
+                // results
+                $result.diabetesByYears = this.c2.calcDiabetesByYears(_diabetes, Number(_yearsDiabetes));
+                $result.diabetesByAge = this.c2.calcDiabetesByAge(_diabetes, Number(_age));
+                $result.imc = this.c2.calcImc(_imc, Number(_age));
+                $result.tabacoo = this.c2.calcTobacco(Number(_cigarettes), Number(_cigars), Number(_pipes));
+                $result.alcohol = this.c2.calcAlcohol(Number(_wines), Number(_beers), Number(_spirits));
+                $result.hypertension = this.c2.calcHypertension(Number(_systolic), Number(_diastolic));
+                $result.insulin = this.c2.calcInsulin(parseInt(_insulin));
+                $result.hemoglobin = this.c2.calcHemoglobin(_hemoglobin);
+                $result.cholesterol = this.c2.calcCholesterol(_cholesterol);
+
+
                 // OPEN results
-                openResultContainer();
+                openModalResults(e, _vars, $result);
 
                 // we are here: THE CALCULATIONS
 
