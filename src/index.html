@@ -359,13 +359,7 @@
         </div> <!-- CONTAINER -->
 
 
-        <div id='result_container' class="container hidden">
-            <div class="row">
-                <div class="col-12">
-                    <p class="form-title">Resultado</p>
-                </div>
-            </div><!-- row -->
-        </div><!-- CONTAINER -->
+
 
         <!-- The Modal warning message -->
         <div id="modal_window" class="modal-window">
@@ -381,7 +375,7 @@
                     <p> <span id="modal_body2_span">Patología</span></p>
                 </div>
                 <div class="modal-footer">
-                    <h3 id="modal_footer_span">Modal Footer</h3>
+                    <p><small id="modal_footer_span">©NacionalRe. Todos los derechos reservados.</small></p>
                 </div>
             </div>
 
@@ -397,34 +391,119 @@
                     <h2 id="modal_header_span">Resultados</h2>
                 </div>
                 <div class="modal-body">
-                    <div class="container">
+                    <div class="container modal">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="selection small">SELECCIÓN</p>
+                                <p class="small"><span id="result_vars_constitution"> Hombre | 11/01/1965 | 56 años |
+                                        75kg | 180 cm | 24,6 imc </span></p>
+                                <p class="small"><span id="result_vars_medical"> Diabetes tipo 1: 5 años | 80 sistólica
+                                        | 145 diastólica | Más de 25 insulina | De 7,0 a 7,5 hemoglobina | Más de 300
+                                        colesterol</span>
+                                </p>
+                                <p class="small"><span id="result_vars_drugs"> 1 cerveza | 1 vino | 1 licor | 14
+                                        cigarrillos | 2 puros | 1 pipa </span>
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="container modal">
                         <div class="row">
                             <div class="col-3">
 
                                 <div class="result-icon life">
                                 </div>
-                                <h2>Fallecimiento</h2>
+                                <h3>Fallecimiento</h3>
+                                <p class="big-number">Normal</p>
+
+                                <table class='result-table' style="width:100%">
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Diabetes (años)</td>
+                                        <td>+100</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Diabetes (edad)</td>
+                                        <td>Rechazar</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>IMC</td>
+                                        <td>+25%</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Tensión</td>
+                                        <td>+0%</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Hemoglobina</td>
+                                        <td>+125%</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Insulina</td>
+                                        <td>+125%</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Colesterol</td>
+                                        <td>+125%</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Tabaco</td>
+                                        <td>+125%</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Alcohol</td>
+                                        <td>+125%</td>
+
+                                    </tr>
+                                </table>
+
+
+
+
+
+
+
+
+
                             </div>
                             <div class="col-3">
                                 <div class="result-icon disability">
                                 </div>
-                                <h2>Invalidez</h2>
+                                <h3>Invalidez</h3>
+                                <p class="big-number">+25%</p>
 
                             </div>
                             <div class="col-3">
                                 <div class="result-icon accident">
                                 </div>
-                                <h2>Fallecimiento accidental</h2>
+                                <h3>Fallecimiento accidental</h3>
+                                <p class="big-number">Rechazar</p>
                             </div>
                             <div class="col-3">
                                 <div class="result-icon ilt"></div>
-                                <h2>Invalidez accidental</h2>
+                                <h3>Invalidez accidental</h3>
+                                <p class="big-number">+225%</p>
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <h3 id="modal_footer_span">NacionalRe</h3>
+                        <p><small>©NacionalRe. Todos los derechos reservados.</small></p>
                     </div>
                 </div>
 

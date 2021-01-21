@@ -1,5 +1,6 @@
 ((window, c2) => {
 
+
     let formForm = document.forms["diabetes_form"];
     //const numberFields = ["birthday", "years_diabetes", "weight", "height", "body_mass", "cigarettes", "cigars", "pipes", "wines", "beers", "spirits", "systolic", "diastolic"];
     //let resultContainer = document.getElementById("result_container");
@@ -9,24 +10,24 @@
 
 
     let pathologiesModalSetup = {
-        header: "Atención:",
+        header: "Patología excluyente",
         content: "Esta patología no permite asegurar ningún riesgo.",
         action: "",
-        footer: "NacionalRe"
+        footer: "©NacionalRe. Todos los derechos reservados."
     }
 
     let birthdayModalSetup = {
-        header: "Atención:",
+        header: "Fecha incorrecta",
         content: "La fecha seleccionada no puede ser mayor que la fecha actual.",
         action: "Por favor, escoga una fecha de nuevo",
-        footer: "NacionalRe"
+        footer: "©NacionalRe. Todos los derechos reservados."
     }
 
     let modalSetup = {
-        header: "Atención:",
+        header: "Atención",
         content: "",
         action: "",
-        footer: "NacionalRe"
+        footer: "©NacionalRe. Todos los derechos reservados."
     }
 
 
@@ -41,7 +42,7 @@
         header: "Atención: Fecha fuera de rango",
         content: "Por favor, escoga una fecha en el rango (entre " + dateRange[0] + " y " + dateRange[1] + " años de edad).",
         action: "La fecha seleccionada debe estar entre el " + this.c2.subtractYearsToDate(new Date(), dateRange[1]).toLocaleDateString('es-ES', dateOptions) + " y el " + this.c2.subtractYearsToDate(new Date(), dateRange[0]).toLocaleDateString('es-ES', dateOptions) + ".",
-        footer: "NacionalRe"
+        footer: "©NacionalRe"
     }
 
     let fieldsOffModalSetup = {
@@ -52,6 +53,7 @@
     }
 
     // global results
+    let _today = new Date();
     let _age = '';
     let _date = formForm.elements['birthday'].value;
     let _gender = formForm.elements['gender'].value;
@@ -121,7 +123,8 @@
             diastolic: _diastolic,
             insulin: _insulin,
             hemoglobin: _hemoglobin,
-            cholesterol: _cholesterol
+            cholesterol: _cholesterol,
+            today: _today
         }
     }
 
@@ -417,7 +420,7 @@
                 $result.diabetesByYears = this.c2.calcDiabetesByYears(_diabetes, Number(_yearsDiabetes));
                 $result.diabetesByAge = this.c2.calcDiabetesByAge(_diabetes, Number(_age));
                 $result.imc = this.c2.calcImc(_imc, Number(_age));
-                $result.tabacoo = this.c2.calcTobacco(Number(_cigarettes), Number(_cigars), Number(_pipes));
+                $result.tobacco = this.c2.calcTobacco(Number(_cigarettes), Number(_cigars), Number(_pipes));
                 $result.alcohol = this.c2.calcAlcohol(Number(_wines), Number(_beers), Number(_spirits));
                 $result.hypertension = this.c2.calcHypertension(Number(_systolic), Number(_diastolic));
                 $result.insulin = this.c2.calcInsulin(parseInt(_insulin));

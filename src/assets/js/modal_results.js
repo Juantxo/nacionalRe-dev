@@ -14,7 +14,8 @@
 
     function openModalResults(event, vars, result) {
         event.stopPropagation();
-        let x
+        let year = vars.today.getFullYear();
+        let x;
     }
 
     exports.openModalResults = openModalResults;

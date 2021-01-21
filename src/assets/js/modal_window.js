@@ -8,6 +8,8 @@
 
 
     let modalDiv = self.document.getElementById("modal_window");
+    let today = new Date();
+    let year = today.getFullYear();
     let close_modal_span = self.document.getElementById("close_modal_info");
     let modal_header_span = self.document.getElementById("modal_header_span");
     let modal_body1_span = self.document.getElementById("modal_body1_span");
@@ -25,7 +27,7 @@
         modal_header_span.innerHTML = message.header;
         modal_body1_span.innerHTML = message.action;
         modal_body2_span.innerHTML = message.content;
-        modal_footer_span.innerHTML = message.footer;
+        modal_footer_span.innerHTML = year + message.footer;
         modalDiv.style.display = "block";
     }
 

@@ -2,7 +2,7 @@
   /* The Modal (background) */
 
   .modal-window {
-    display: none; /* Hidden by default */
+    display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -12,12 +12,13 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0, 0, 0); /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    overflow: hidden;
   }
 
   /* Modal Content */
   .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 4% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
@@ -52,7 +53,7 @@
 
   /* Modal Body */
   .modal-body {
-    padding: 32px 16px;
+    padding: 16px 16px;
   }
 
   /* Modal Footer */
@@ -85,6 +86,25 @@
     &.ilt {
       background-image: url(../images/SVG/ilt.svg);
     }
+  }
+  .result-table {
+    font-size: 12px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  td,
+  th {
+    border: none;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    padding: 4px 8px;
+  }
+  td:last-child,
+  th:last-child {
+    text-align: right;
+  }
+  th {
+    display: none;
   }
   // pad
   @media only screen and (max-width: 989px) {
