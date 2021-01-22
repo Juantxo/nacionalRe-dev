@@ -390,11 +390,14 @@
                         <div class="row">
                             <div class="col-12">
                                 <p class="selection small">Consulta realizada el <span id="result_today"></span></p>
-                                <p class="small"><span id="result_vars_constitution"> Hombre | 11/01/1965 | 56 años |
-                                        75kg | 180 cm | 24,6 imc </span></p>
-                                <p class="small"><span id="result_vars_medical"> Diabetes tipo 1: 5 años | 80 sistólica
+                                <p class="small"><span id="result_vars_constitution">
+                                        <!-- Hombre | 11/01/1965 | 56 años | 75kg | 180 cm | 24,6 imc  -->
+                                    </span></p>
+                                <p class="small"><span id="result_vars_medical">
+                                        <!-- Diabetes tipo 1: 5 años | 80 sistólica
                                         | 145 diastólica | Más de 25 insulina | De 7,0 a 7,5 hemoglobina | Más de 300
-                                        colesterol</span>
+                                        colesterol -->
+                                    </span>
                                 </p>
                                 <p class="small"><span id="result_vars_drugs"> 1 cerveza | 1 vino | 1 licor | 14
                                         cigarrillos | 2 puros | 1 pipa </span>
@@ -664,7 +667,6 @@
 
             // functions
             function getDictionaryWord(key) {
-                let x = dictionary.filter(d => d.key === key);
                 return dictionary.filter(d => d.key === key);
             }
 
@@ -677,7 +679,7 @@
 
             let x;
 
-            //Diabetes tipo 1: 5 años | 80 sistólica | 145 diastólica | Más de 25 insulina | De 7,0 a 7,5 hemoglobina | Más de 300 colesterol
+
         </script>
 
 </body>
