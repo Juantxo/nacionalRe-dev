@@ -300,14 +300,12 @@
                             <li><input type="radio" id="hem2" name="hemoglobin" value="hem2" autocomplete="off"> <label
                                     for="hem2">de 7,0 a 7,5</label></li>
                             <li><input type="radio" id="hem3" name="hemoglobin" value="hem3" autocomplete="off"> <label
-                                    for="hem3">de 7,6 a
-                                    8,0</label></li>
+                                    for="hem3">de 7,6 a 8,0</label></li>
                             <li><input type="radio" id="hem4" name="hemoglobin" value="hem4" autocomplete="off"> <label
                                     for="hem4">de 8,1 a 9,0</label>
                             </li>
                             <li><input type="radio" id="hem5" name="hemoglobin" value="hem5" autocomplete="off"> <label
-                                    for="hem5">de 9,1 a
-                                    10</label></li>
+                                    for="hem5">de 9,1 a 10</label></li>
                             <li><input type="radio" id="hem6" name="hemoglobin" value="hem6" autocomplete="off"> <label
                                     for="hem6">Más de 10</label></li>
                         </ul>
@@ -324,14 +322,11 @@
                                     for="cho1">Hasta 200</label>
                             </li>
                             <li><input type="radio" id="cho2" name="cholesterol" value="cho2" autocomplete="off"> <label
-                                    for="cho2">de 200 a
-                                    250</label></li>
+                                    for="cho2">de 200 a 250</label></li>
                             <li><input type="radio" id="cho3" name="cholesterol" value="cho3" autocomplete="off"> <label
-                                    for="cho3">de 251 a
-                                    275</label></li>
+                                    for="cho3">de 251 a 275</label></li>
                             <li><input type="radio" id="cho4" name="cholesterol" value="cho4" autocomplete="off"> <label
-                                    for="cho4">de 276 a
-                                    300</label>
+                                    for="cho4">de 276 a 300</label>
                             </li>
                             <li><input type="radio" id="cho5" name="cholesterol" value="cho5" autocomplete="off"> <label
                                     for="cho5">Más de 300</label></li>
@@ -394,7 +389,7 @@
                     <div class="container modal">
                         <div class="row">
                             <div class="col-12">
-                                <p class="selection small">SELECCIÓN</p>
+                                <p class="selection small">Consulta realizada el <span id="result_today"></span></p>
                                 <p class="small"><span id="result_vars_constitution"> Hombre | 11/01/1965 | 56 años |
                                         75kg | 180 cm | 24,6 imc </span></p>
                                 <p class="small"><span id="result_vars_medical"> Diabetes tipo 1: 5 años | 80 sistólica
@@ -503,7 +498,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <p><small>©NacionalRe. Todos los derechos reservados.</small></p>
+                        <p><small><span id="result_year"></span>©NacionalRe. Todos los derechos reservados.</small></p>
                     </div>
                 </div>
 
@@ -542,6 +537,147 @@
             ])
 
 
+        </script>
+
+        <script>
+
+            let dictionary = [{ "key": "date", "value": "fecha" },
+            { "key": "age", "value": "edad" },
+            { "key": "gender", "value": "género" },
+            { "key": "male", "value": "Hombre" },
+            { "key": "female", "value": "Mujer" },
+            { "key": "diabetes", "value": "diabetes" },
+            { "key": "t1", "value": "tipo 1" },
+            { "key": "t2", "value": "tipo 2" },
+            { "key": "yearsDiabetes", "value": "años de tratamiento de diabetes" },
+            { "key": "weigth", "value": "peso" },
+            { "key": "height", "value": "pltura" },
+            { "key": "imc", "value": "índice de masa muscular" },
+            { "key": "cigarettes", "value": "cigarrillo" },
+            { "key": "cigars", "value": "puro" },
+            { "key": "pipes", "value": "pipa" },
+            { "key": "wines", "value": "vino" },
+            { "key": "beers", "value": "cerveza" },
+            { "key": "spirits", "value": "licor" },
+            { "key": "systolic", "value": "sistólica" },
+            { "key": "diastolic", "value": "diastólica" },
+            { "key": "insulin", "value": "insulina" },
+            { "key": "ins1", "value": "Hasta 25 unidades diarias de insulina" },
+            { "key": "ins2", "value": "Más de 25 unidades diarias de insulina" },
+            { "key": "hemoglobin", "value": "hemoglobina" },
+            { "key": "hem1", "value": "Menos de 7,0" },
+            { "key": "hem2", "value": "De 7,0 a 7,5" },
+            { "key": "hem3", "value": "De 7,6 a 8,0" },
+            { "key": "hem4", "value": "De 8,1 a 9,0" },
+            { "key": "hem5", "value": "De 9,1 a 10" },
+            { "key": "hem6", "value": "Más de 10" },
+            { "key": "cholesterol", "value": "colesterol" },
+            { "key": "cho1", "value": "Hasta 200" },
+            { "key": "cho2", "value": "De 200 a 250" },
+            { "key": "cho3", "value": "De 251 a 275" },
+            { "key": "cho4", "value": "De 276 a 300" },
+            { "key": "cho5", "value": "Más de 300" }]
+
+
+
+            let dVars = {
+                "date": "1969-04-12T00:00:00.000Z",
+                "age": 51,
+                "gender": "male",
+                "diabetes": "t2",
+                "yearsDiabetes": "2",
+                "weight": "80",
+                "height": "180",
+                "imc": 24.691358024691358,
+                "cigarettes": "1",
+                "cigars": "1",
+                "pipes": "2",
+                "wines": "2",
+                "beers": "1",
+                "spirits": "2",
+                "systolic": "130",
+                "diastolic": "80",
+                "insulin": "ins2",
+                "hemoglobin": "hem1",
+                "cholesterol": "cho1",
+                "today": "2021-01-22T16:55:38.408Z"
+            };
+            let dResults = {
+                "diabetesByYears": {
+                    "life": 0,
+                    "disability": 0,
+                    "accident": 0,
+                    "ilt": 25
+                },
+                "diabetesByAge": {
+                    "life": 25,
+                    "disability": 25,
+                    "accident": 25,
+                    "ilt": 0
+                },
+                "imc": {
+                    "life": 0,
+                    "disability": 0,
+                    "accident": 0,
+                    "ilt": 0
+                },
+                "tobacco": 25,
+                "alcohol": 999,
+                "hypertension": 0,
+                "insulin": 0,
+                "hemoglobin": 0,
+                "cholesterol": 0
+            }
+
+
+            // selectors
+            let result_today = document.getElementById('result_today');
+            let result_year = document.getElementById('result_year');
+            let result_vars_constitution = document.getElementById('result_vars_constitution');
+            let result_vars_medical = document.getElementById('result_vars_medical');
+
+
+            // vars
+            let newDate = new Date(dVars.today);
+            let year = newDate.getFullYear();
+            let today = newDate.getDate() + '/' + (newDate.getMonth() + 1) + '/' + newDate.getFullYear() + ' a las ' + newDate.getUTCHours() + ':' + newDate.getUTCMinutes() + 'h.';
+            let gender = getDictionaryWord(dVars.gender)[0].value;
+            let bornDate = new Date(dVars.date);
+            let date = bornDate.getDate() + '/' + (bornDate.getMonth() + 1) + '/' + bornDate.getFullYear() + '';
+            let age = dVars.age + ' años';
+            let height = dVars.height + ' cm';
+            let weight = dVars.weight + ' kg';
+            let imc = dVars.imc.toFixed(2) + ' imc';
+            let diabetes = 'Diabetes ' + getDictionaryWord(dVars.diabetes)[0].value;
+            let systolic = dVars.systolic + ' sistólica';
+            let diastolic = dVars.diastolic + ' diastólica';
+            let insulin = getDictionaryWord(dVars.insulin)[0].value;
+            let hemoglobin = getDictionaryWord(dVars.hemoglobin)[0].value + ' hemoglobina';
+            let cholesterol = getDictionaryWord(dVars.cholesterol)[0].value + ' colesterol';
+
+            let constitution = gender + ' | ' + date + ' | ' + age + ' | ' + height + ' | ' + weight + ' | ' + imc + ' | ';
+            let medical = diabetes + ': ' + dVars.yearsDiabetes + ' años' + ' | ' + systolic + ' | ' + diastolic + ' | ' + insulin + ' | ' + hemoglobin + ' | ' + cholesterol;
+
+
+
+
+
+            // functions
+            function getDictionaryWord(key) {
+                let x = dictionary.filter(d => d.key === key);
+                return dictionary.filter(d => d.key === key);
+            }
+
+            // print
+            result_today.innerHTML = today;
+            result_year.innerHTML = year;
+            result_vars_constitution.innerHTML = constitution;
+            result_vars_medical.innerHTML = medical;
+
+
+            let x;
+
+            //Diabetes tipo 1: 5 años | 80 sistólica | 145 diastólica | Más de 25 insulina | De 7,0 a 7,5 hemoglobina | Más de 300 colesterol
         </script>
 
 </body>
