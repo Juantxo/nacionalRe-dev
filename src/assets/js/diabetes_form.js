@@ -430,6 +430,7 @@
                 _vars = getVars();
 
                 // OPEN results
+
                 this.c2.openModalResults(e, _vars, $result);
 
                 // we are here: THE CALCULATIONS
@@ -446,6 +447,7 @@
     let init = () => {
         initForm();
         this.c2.initModalWindow();
+        this.c2.initModalResults();
         initSubmit();
     };
 
