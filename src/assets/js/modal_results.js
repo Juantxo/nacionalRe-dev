@@ -162,12 +162,12 @@
         table += '<table class="result-table" style="width:100%">';
         table += '<tr><th </th><th></th></tr>';
         table += '<tr>';
-        table += '<td>Diabetes (años)</td>';
+        table += '<td>Antigüedad diabetes</td>';
         table += ' <td>' + getPartialResult(data.diabetesByYears[key]) + '</td>';
         table += ' </tr>';
 
         table += '<tr>';
-        table += '<td>Diabetes (edad)</td>';
+        table += '<td>Edad candidato</td>';
         table += ' <td>' + getPartialResult(data.diabetesByAge[key]) + '</td>';
         table += ' </tr>';
 
@@ -230,7 +230,7 @@
         let age = _vars.age + ' años';
         let height = _vars.height + ' cm';
         let weight = _vars.weight + ' kg';
-        let imc = _vars.imc.toFixed(2) + ' imc';
+        let imc = _vars.imc + ' imc';
         let diabetes = 'Diabetes ' + getDictionaryWord(_vars.diabetes)[0].value;
         let systolic = _vars.systolic + ' sistólica';
         let diastolic = _vars.diastolic + ' diastólica';

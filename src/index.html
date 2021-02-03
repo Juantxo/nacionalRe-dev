@@ -23,20 +23,17 @@
                         <p class="mandatory"><span id='cbox_msg'><small>Estas patologías no permite asegurar ningún
                                     riesgo.</small></span>&nbsp;&#8205;</p>
                         <ul class="vertical">
-                            <li> <input type="checkbox" id="cbox1" name="cbox" value="" autocomplete="off">Retinología
+                            <li> <input type="checkbox" id="cbox1" name="cbox" value="" autocomplete="off">Retinopatía
                             </li>
                             <li><input type="checkbox" id="cbox2" name="cbox" value="" autocomplete="off">Neuropatía
                             </li>
                             <li><input type="checkbox" id="cbox3" name="cbox" value="" autocomplete="off">Enfermedad
-                                coronaria
-                                (Angina, infarto
-                                aguado)</li>
+                                coronaria (Angina, I.A.M.)</li>
                             <li><input type="checkbox" id="cbox4" name="cbox" value="" autocomplete="off">Enfermedad
                                 renal asociada
                             </li>
-                            <li><input type="checkbox" id="cbox5" name="cbox" value="" autocomplete="off">Enfermedad
-                                arterial
-                                asociada</li>
+                            <!-- <li><input type="checkbox" id="cbox5" name="cbox" value="" autocomplete="off">Enfermedad
+                                arterial asociada</li> -->
                             <li><input type="checkbox" id="cbox6" name="cbox" value="" autocomplete="off">Enfermedad
                                 arterial
                                 periférica</li>
@@ -68,8 +65,7 @@
                             </div>
                             <div class="col-6">
                                 <p class="form-title">Fecha nacimiento</p>
-                                <p class="numeric"><small><label for="years_diabetes">Entre 13 y 69
-                                            años.</label></small>
+                                <p class="numeric"><small><label for="years_diabetes">&nbsp;</label></small>
                                 </p>
 
                                 <input class="margin__top-s row numeric" type="date" id="birthday" name="birthday"
@@ -146,7 +142,7 @@
 
                             </tr>
                             <tr>
-                                <td>Masa corporal
+                                <td>Índice Masa
 
                                     <p class="mandatory"><span id='body_mass_msg'><small>Campo
                                                 obligatorio.</small></span>&nbsp;</p>
@@ -277,16 +273,17 @@
                 <div class="row">
                     <div class="col-4">
                         <p class="form-title">Insulina</p>
-                        <small>Unidades día y/o antidiabéticos orales</small>
+                        <small>Cantidades</small>
                         <p class="mandatory"><span id='insulin_msg'><small>Campo
                                     obligatorio.</small></span>&nbsp;</p>
 
                         <ul class="vertical">
                             <li><input type="radio" id="ins1" name="insulin" value="ins1" autocomplete="off">
-                                <label for="ins1">Hasta 25</label>
+                                <label for="ins1">Hasta 25 <small>unidades/día y/o antidiabéticos orales</small></label>
                             </li>
                             <li><input type="radio" id="ins2" name="insulin" value="ins2" autocomplete="off"> <label
-                                    for="ins2">Más de 25</label></li>
+                                    for="ins2">Más de 25 <small>unidades/día</small></label>
+                            </li>
                         </ul>
                     </div>
 
@@ -342,13 +339,13 @@
 
                 <div class="row send margin__top-m">
                     <div class="col-4">
-                        <input id="pdf_button" type="button" name='pdf_button' value="Formulario" autocomplete="off">
+                        <input id="pdf_button" type="button" name='pdf_button' value="Cuestionario" autocomplete="off">
                     </div>
                     <div class="col-4">
                         <input id="reset_button" type="reset" name='reset_button' value="Restaurar" autocomplete="off">
                     </div>
                     <div class="col-4">
-                        <input id="submit_button" type="submit" name='submit_button' value="Enviar datos"
+                        <input id="submit_button" type="submit" name='submit_button' value="Tarificación"
                             autocomplete="off">
                     </div>
 

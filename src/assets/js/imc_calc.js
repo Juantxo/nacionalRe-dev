@@ -11,10 +11,10 @@
     function calcImcLife(imc) {
         let result = 0;
 
-        if (imc <= 27) {
+        if (imc < 28) {
             result += 0;
         }
-        if (imc > 27 && imc <= 30) {
+        if (imc >= 28 && imc <= 30) {
             result += 25;
         }
         if (imc > 30 && imc <= 32) {

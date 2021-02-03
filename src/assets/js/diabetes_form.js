@@ -273,12 +273,12 @@
         let input = formForm.elements['body_mass'];
         if (_weight !== "" && _height !== "") {
             let w = this.c2.cmToMeter(Number(_height));
-            _imc = Number(_weight) / (Number(w) * Number(w));
+            _imc = (Number(_weight) / (Number(w) * Number(w))).toFixed(2);
             input.value = _imc;
             this.c2.setImcColor(input, _imc);
             // to move
             $result.imc = this.c2.calcImc(_imc, Number(_age));
-            let x;
+
 
         }
         else {
