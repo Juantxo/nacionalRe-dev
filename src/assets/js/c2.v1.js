@@ -61,6 +61,19 @@
     }
     return true;
   }
+
+  function limitChars(evt) {
+    let e = evt || window.event;
+    let y = e.currentTarget.value;
+    var max_chars = 2;
+
+    if (y.length > max_chars) {
+      e.currentTarget.value = y.substr(0, max_chars);
+    }
+    return false;
+  }
+
+
   function cmToMeter(cm) {
     return Number(cm) / 100;
   }
@@ -71,6 +84,8 @@
   exports.subtractYearsToDate = subtractYearsToDate;
   exports.dateIsOnRange = dateIsOnRange;
   exports.isNumberKey = isNumberKey;
+  exports.limitChars = limitChars;
+
   exports.cmToMeter = cmToMeter;
 
   Object.defineProperty(exports, "__esModule", { value: true });

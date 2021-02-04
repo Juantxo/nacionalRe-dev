@@ -126,7 +126,8 @@
                                                 obligatorio.</small></span>&nbsp;</p>
 
                                 </td>
-                                <td><input type="number" id="weight" name="weight" min="0" max="600" autocomplete="off">
+                                <td><input type="number" id="weight" name="weight" maxlength="3" min="0" max="600"
+                                        autocomplete="off">
                                 </td>
 
                             </tr>
@@ -339,7 +340,8 @@
 
                 <div class="row send margin__top-m">
                     <div class="col-4">
-                        <input id="pdf_button" type="button" name='pdf_button' value="Cuestionario" autocomplete="off">
+                        <input id="pdf_button" type="button" name='pdf_button' value="Cuestionario" autocomplete="off"
+                            onClick="window.open('http://davinci.nacionalre.es/pdfs/cuesdiab.pdf');">
                     </div>
                     <div class="col-4">
                         <input id="reset_button" type="reset" name='reset_button' value="Restaurar" autocomplete="off">

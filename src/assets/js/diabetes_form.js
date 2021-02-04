@@ -2,10 +2,10 @@
 
 
     let formForm = document.forms["diabetes_form"];
+    let diabetes_cal = document.getElementById('diabetes_cal');
     //const numberFields = ["birthday", "years_diabetes", "weight", "height", "body_mass", "cigarettes", "cigars", "pipes", "wines", "beers", "spirits", "systolic", "diastolic"];
     //let resultContainer = document.getElementById("result_container");
 
-    let submitButton = document.getElementById("submit_button");
 
 
 
@@ -146,6 +146,15 @@
         return wrongFields.length > 0 ? false : true;
     }
 
+    function resetNodeFields(nodeList) {
+
+        let i = 0;
+        for (i = 0; i < nodeList.length; i++) {
+            document.getElementById(nodeList[i].name + "_msg").style.display = "none";
+        }
+
+
+    }
     function checkNodeFields(nodeList) {
         let i = 0;
         for (i = 0; i < nodeList.length; i++) {
@@ -170,7 +179,10 @@
     // Only numeric values on fields, no comma, no dot, no paste, no drop.
     function setNumericField() {
         let fields = formForm.querySelectorAll('input[type="number"]');
-        this.c2.addEventListenerList(fields, "keypress", (e) => { this.c2.isNumberKey(e) });
+        this.c2.addEventListenerList(fields, "keypress", (e) => {
+            this.c2.isNumberKey(e)
+            this.c2.limitChars(e)
+        });
         this.c2.addEventListenerList(fields, "paste", (e) => { e.preventDefault(); return false; });
         this.c2.addEventListenerList(fields, "drop", (e) => { e.preventDefault(); return false; });
         this.c2.addEventListenerList(fields, "change", (e) => { toggleMandatoryMsg(e) });
@@ -198,10 +210,17 @@
     function initPathologies() {
         // 1. Pathologies
         let pathologyCheckBoxes = document.getElementsByName('cbox');
-        this.c2.addEventListenerList(pathologyCheckBoxes, "click", (e) => { this.c2.openModalWindow(e, pathologiesModalSetup) });
-        this.c2.addEventListenerList(pathologyCheckBoxes, "change", (e) => { toggleMandatoryMsg(e) });
+        this.c2.addEventListenerList(pathologyCheckBoxes, "click", (e) => {
+
+            this.c2.openModalWindow(e, pathologiesModalSetup)
+        });
+        this.c2.addEventListenerList(pathologyCheckBoxes, "change", (e) => {
+
+            toggleMandatoryMsg(e)
+        });
 
     }
+
 
     function initBirthday() {
         // 2. Birthday and age
@@ -370,6 +389,7 @@
 
 
     function initForm() {
+
         setNumericField();
         initPathologies();
         initRadioButtons('gender');
@@ -396,14 +416,14 @@
 
     }
     function initSubmit() {
+        let numericFields = formForm.querySelectorAll('input[type="number"]');
+        let genderField = formForm.elements['gender'];
+        let pathologyFields = document.getElementsByName('cbox');
+        let dateFields = formForm.querySelectorAll('input[type="date"]');
+
         // submit
         formForm.onsubmit = (e) => {
             e.preventDefault();
-            let numericFields = formForm.querySelectorAll('input[type="number"]');
-            let genderField = formForm.elements['gender'];
-            let pathologyFields = document.getElementsByName('cbox');
-            let dateFields = formForm.querySelectorAll('input[type="date"]');
-
             checkNodeFields(pathologyFields);
             checkNodeFields(formForm.elements['gender']);
             checkNodeFields(formForm.elements['diabetes']);
@@ -441,6 +461,17 @@
                 return false;
             }
         }
+        // submit
+        formForm.onreset = (e) => {
+            resetNodeFields(pathologyFields);
+            resetNodeFields(formForm.elements['gender']);
+            resetNodeFields(formForm.elements['diabetes']);
+            resetNodeFields(formForm.elements['insulin']);
+            resetNodeFields(formForm.elements['hemoglobin']);
+            resetNodeFields(formForm.elements['cholesterol']);
+            resetNodeFields(numericFields);
+            resetNodeFields(dateFields);
+        }
     }
 
 
@@ -449,6 +480,8 @@
         this.c2.initModalWindow();
         this.c2.initModalResults();
         initSubmit();
+
+
     };
 
     init();
