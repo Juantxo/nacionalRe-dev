@@ -520,8 +520,13 @@
 
         diabetes_cal.addEventListener('keydown', (e) => {
             if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13 || e.code == 'Enter' || e.which == 13) {
-                if (e.target.nodeName == 'INPUT' && (e.target.type == 'text' || e.target.type == 'number' || e.target.type == 'date')) {
+                if (e.target.nodeName == 'INPUT') {
                     e.preventDefault();
+                    let form = e.target.form;
+                    let index = Array.prototype.indexOf.call(form, e.target);
+                    if (index < 37) {
+                        form.elements[index + 1].focus();
+                    }
                     return false;
                 }
             }

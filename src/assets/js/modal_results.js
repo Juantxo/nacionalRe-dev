@@ -79,6 +79,18 @@
     function getDictionaryWord(key) {
         return dictionary.filter(d => d.key === key);
     }
+
+    function getYearsDiabetes(num) {
+        if (+num > 1) {
+            return num + ' años';
+        }
+        if (+num === 1) {
+            return num + ' año';
+        }
+        return 'Sin años de antigüedad';
+    }
+
+
     function getAlcohol(beers, wines, spirits) {
         let result = '';
         if (beers === 0 && wines === 0 && spirits === 0) {
@@ -213,8 +225,6 @@
 
 
 
-
-
     function openModalResults(event, _vars, $results) {
         event.stopPropagation();
         //let year = _vars.today.getFullYear();
@@ -242,7 +252,7 @@
 
 
         let constitution = gender + ' | ' + date + ' | ' + age + ' | ' + height + ' | ' + weight + ' | ' + imc + ' | ';
-        let medical = diabetes + ': ' + _vars.yearsDiabetes + ' años' + ' | ' + systolic + ' | ' + diastolic + ' | ' + insulin + ' | ' + hemoglobin + ' | ' + cholesterol;
+        let medical = diabetes + ': ' + getYearsDiabetes(_vars.yearsDiabetes) + ' | ' + systolic + ' | ' + diastolic + ' | ' + insulin + ' | ' + hemoglobin + ' | ' + cholesterol;
         let drugs = alcohol + ' | ' + tobacco;
         let total_life = getTotalResult($results, 'life');
         let total_disability = getTotalResult($results, 'disability');
